@@ -5,6 +5,7 @@ import BarraSuperior from './components/BarraSuperior';
 
 function App() {
   return (
+    
     <div className="app">
       <BarraSuperior />
       <div className="contenido-principal">
