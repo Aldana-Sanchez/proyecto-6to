@@ -4,8 +4,7 @@ import FormularioInscripcion from './components/FormularioInscripcion';
 import BarraSuperior from './components/BarraSuperior';
 
 function App() {
-  return (
-    
+  return ( 
     <div className="app">
       <BarraSuperior />
       <div className="contenido-principal">
