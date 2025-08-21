@@ -1,5 +1,5 @@
 # proyecto-6to
-Nombre de los integrantes del grupo: Valentina Batiuk, Sanchez Aldana, Vazquez Luciano y Vivanco Catalina. 
+Nombre de los integrantes del grupo: Amenabar Luciana, Sanchez Aldana, Valdes Agustina y Vivanco Catalina. 
 Nombre del grupo: vlac
 Nombre de la App: wido
 Objetivo: El objetivo es facilitar la inscripcion y busqueda de la informacion para los alumnos que se inscriben a las mesas de examen, haciendo que puedan inscribirse y automaticamente acceder a la informacion de la materia a rendir, mostrandoles el programa y los horarios de las clases de consulta de dicha materia, sin necesidad de estar buscando entre todas las materias.
