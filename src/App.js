@@ -1,30 +1,26 @@
-import React, { useState } from "react";
-import FormularioInscripcion from "./components/FormularioInscripcion";
-import MateriaMatematica from "./components/MateriaMatematica";
 
+import Inicio from "./components/inicio";
+import FormularioInscripcion from "./components/FormularioInscripcion";
+import MateriasSeleccionadas from "./components/materiaselegidas";
 
 function App() {
-<<<<<<< HEAD
-  return ( 
-    <div className="app">
-      <BarraSuperior />
-      <div className="contenido-principal">
-        <FormularioInscripcion />
-      </div>
-    </div>
-=======
-  const [materiaVista, setMateriaVista] = useState("");
+  const [pantalla, setPantalla] = useState("inicio");
+  const [usuario, setUsuario] = useState(null);
+  const [materias, setMaterias] = useState([]);
 
-  const seleccionarMateria = (materia) => {
-    setMateriaVista(materia);
+  const seleccionarMaterias = (materiasSeleccionadas) => {
+    setMaterias(materiasSeleccionadas);
+    setPantalla("materia");
   };
 
   const volverAlFormulario = () => {
-    setMateriaVista("");
+    setPantalla("formulario");
+    setMaterias([]);
   };
 
   return (
     <>
+
       {materiaVista === "" && (
         <FormularioInscripcion onMateriaSeleccionada={seleccionarMateria} />
       )}
@@ -32,8 +28,28 @@ function App() {
         <MateriaMatematica volver={volverAlFormulario} />
       )}
       
-    </>
->>>>>>> 81af61b12b2a97dc3e3303b1d1d0a8222f1ab30c
+      {pantalla === "inicio" && (
+        <Inicio
+          onContinuar={(usuarioRegistrado) => {
+            setUsuario(usuarioRegistrado);
+            setPantalla("formulario");
+          }}
+        />
+      )}
+
+      {pantalla === "formulario" && (
+        <FormularioInscripcion
+          onMateriasSeleccionadas={seleccionarMaterias}
+          usuario={usuario}
+        />
+      )}
+
+      {pantalla === "materia" && (
+        <MateriasSeleccionadas volver={volverAlFormulario} materias={materias} />
+      )}
+  
+  </> 
+
   );
 }
 
