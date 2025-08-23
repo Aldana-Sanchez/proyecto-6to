@@ -1,4 +1,4 @@
-function MateriaFisica() {
+function materiadibujo1() {
   return (
     <div className="pagina-materia">
       <h2>Fisica</h2>
@@ -17,4 +17,4 @@ function MateriaFisica() {
   );
 }
 
-export default MateriaFisica;
+export default materiadibujo1;

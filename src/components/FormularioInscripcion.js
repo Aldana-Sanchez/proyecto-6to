@@ -56,9 +56,15 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
                 }
               >
                 <option value="">Seleccionar materia</option>
-                <option value="matematica">Matemática</option>
-                <option value="lengua">Lengua</option>
-                <option value="historia">Historia</option>
+                <option value="matematica">Matemática 1° </option>
+                <option value="lengua">Lengua y Literatura 1° </option>
+                <option value="historia">Historia 1° </option>
+                <option value="fisica">Física 1° </option>
+                <option value="biologia">Biologia 1° </option>
+                <option value="educacion civica"> Educacion Civica 1° </option>
+                <option value="dibujo"> Dibujo 1° </option>
+                <option value="geografia"> Geografia 1°</option>
+
               </select>
             </div>
           ))}
