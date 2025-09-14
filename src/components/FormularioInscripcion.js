@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase/firebase";
 import "../estilo.css";
 
 function FormularioInscripcion({ onMateriasSeleccionadas }) {
@@ -8,6 +8,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
     materiasBasico: ["", "", "", "", ""],
     materiasSuperior: ["", "", "", "", ""],
   });
+  const [guardando, setGuardando] = useState(false);
 
   const handleSelectChange = (e, index, ciclo) => {
     const updatedMaterias = [...formData[ciclo]];
@@ -28,18 +29,24 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
       return;
     }
 
+    console.log("Intentando guardar en Firestore...", materiasElegidas);
+    setGuardando(true);
+
     try {
-      //  Guardado en Firestore
-      await addDoc(collection(db, "inscripciones"), {
+      const docRef = await addDoc(collection(db, "inscripciones"), {
         materias: materiasElegidas,
         fecha: new Date(),
       });
+      console.log("Documento agregado con ID:", docRef.id);
       alert("Inscripción guardada en Firebase!");
+      // llamar al padre SOLO después de guardar con éxito
+      onMateriasSeleccionadas(materiasElegidas);
     } catch (error) {
       console.error("Error al guardar:", error);
+      alert("Error al guardar. Mirá la consola para más info.");
+    } finally {
+      setGuardando(false);
     }
-
-    onMateriasSeleccionadas(materiasElegidas);
   };
 
   return (
@@ -53,7 +60,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
             <div className="campo" key={`basico-${i}`}>
               <span className="icono">📕</span>
               <select
-                value={materia}
+                value={materia || ""}                      // <- importante
                 onChange={(e) => handleSelectChange(e, i, "materiasBasico")}
               >
                 <option value="">Seleccionar materia</option>
@@ -74,7 +81,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
             <div className="campo" key={`superior-${i}`}>
               <span className="icono">📘</span>
               <select
-                value={materia}
+                value={materia || ""}                      // <- importante
                 onChange={(e) => handleSelectChange(e, i, "materiasSuperior")}
               >
                 <option value="">Seleccionar materia</option>
@@ -85,7 +92,9 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
             </div>
           ))}
 
-          <button type="submit">Inscribirse</button>
+          <button type="submit" disabled={guardando}>
+            {guardando ? "Guardando..." : "Inscribirse"}
+          </button>
         </form>
       </div>
     </div>
