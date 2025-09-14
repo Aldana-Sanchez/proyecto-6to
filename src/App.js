@@ -1,4 +1,4 @@
-
+import React, { useState } from "react";
 import Inicio from "./components/inicio";
 import FormularioInscripcion from "./components/FormularioInscripcion";
 import MateriasSeleccionadas from "./components/materiaselegidas";
@@ -20,14 +20,6 @@ function App() {
 
   return (
     <>
-
-      {materiaVista === "" && (
-        <FormularioInscripcion onMateriaSeleccionada={seleccionarMateria} />
-      )}
-      {materiaVista === "matematica" && (
-        <MateriaMatematica volver={volverAlFormulario} />
-      )}
-      
       {pantalla === "inicio" && (
         <Inicio
           onContinuar={(usuarioRegistrado) => {
@@ -45,11 +37,12 @@ function App() {
       )}
 
       {pantalla === "materia" && (
-        <MateriasSeleccionadas volver={volverAlFormulario} materias={materias} />
+        <MateriasSeleccionadas 
+          volver={volverAlFormulario} 
+          materias={materias} 
+        />
       )}
-  
-  </> 
-
+    </>
   );
 }
 
