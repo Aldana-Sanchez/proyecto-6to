@@ -39,7 +39,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
       });
       console.log("Documento agregado con ID:", docRef.id);
       alert("Inscripción guardada en Firebase!");
-      // llamar al padre SOLO después de guardar con éxito
+
       onMateriasSeleccionadas(materiasElegidas);
     } catch (error) {
       console.error("Error al guardar:", error);
@@ -60,7 +60,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
             <div className="campo" key={`basico-${i}`}>
               <span className="icono">📕</span>
               <select
-                value={materia || ""}                      // <- importante
+                value={materia || ""}                    
                 onChange={(e) => handleSelectChange(e, i, "materiasBasico")}
               >
                 <option value="">Seleccionar materia</option>
@@ -81,7 +81,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
             <div className="campo" key={`superior-${i}`}>
               <span className="icono">📘</span>
               <select
-                value={materia || ""}                      // <- importante
+                value={materia || ""}                
                 onChange={(e) => handleSelectChange(e, i, "materiasSuperior")}
               >
                 <option value="">Seleccionar materia</option>
