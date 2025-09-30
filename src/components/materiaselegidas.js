@@ -1,5 +1,5 @@
 import React from "react";
-import MateriaMatematica from "./MateriaMatematica";
+import MateriaMatematica from "./materiaMatematica";
 
 
 

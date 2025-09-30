@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import Inicio from "./components/inicio";
 import FormularioInscripcion from "./components/FormularioInscripcion";
 import MateriasSeleccionadas from "./components/materiaselegidas";
+import "./estilo.css"; // estilos personalizados
+import { db } from "./firebase/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 function App() {
   const [pantalla, setPantalla] = useState("inicio");
   const [usuario, setUsuario] = useState(null);
   const [materias, setMaterias] = useState([]);
 
-  const seleccionarMaterias = (materiasSeleccionadas) => {
-    setMaterias(materiasSeleccionadas);
-    setPantalla("materia");
-  };
+  //firebase
+const seleccionarMaterias = (materiasSeleccionadas) => {
+  setMaterias(materiasSeleccionadas);
+  setPantalla("materia");
+};
 
   const volverAlFormulario = () => {
     setPantalla("formulario");
@@ -37,13 +41,25 @@ function App() {
       )}
 
       {pantalla === "materia" && (
+<<<<<<< HEAD
         <MateriasSeleccionadas 
           volver={volverAlFormulario} 
           materias={materias} 
+=======
+        <MateriasSeleccionadas
+          volver={volverAlFormulario}
+          materias={materias}
+>>>>>>> 8361505a1bf3c0988d9f822b1d549bebc95301b5
         />
       )}
     </>
   );
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+
+
+>>>>>>> 8361505a1bf3c0988d9f822b1d549bebc95301b5
