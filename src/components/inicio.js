@@ -3,6 +3,8 @@ import "../estilo.css";
 
 function Inicio({ onContinuar }) {
   const [formData, setFormData] = useState({
+    nombre: "",
+    apellido: "",
     correo: "",
     contrasena: "",
     dni: "",
@@ -15,10 +17,24 @@ function Inicio({ onContinuar }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.correo || !formData.contrasena || !formData.dni || !formData.rol) {
+
+    if (
+      !formData.nombre ||
+      !formData.apellido ||
+      !formData.correo ||
+      !formData.contrasena ||
+      !formData.dni ||
+      !formData.rol
+    ) {
       alert("Completa todos los campos y selecciona tu rol.");
       return;
     }
+
+    if (formData.rol !== "alumno") {
+      alert("Solo los alumnos pueden inscribirse a materias.");
+      return;
+    }
+
     onContinuar(formData);
   };
 
@@ -28,7 +44,7 @@ function Inicio({ onContinuar }) {
       <div className="formulario-box">
         <h2>REGISTRO DE USUARIO</h2>
         <form onSubmit={handleSubmit}>
-             <div className="campo">
+          <div className="campo">
             <input
               type="text"
               name="nombre"
@@ -38,7 +54,8 @@ function Inicio({ onContinuar }) {
               required
             />
           </div>
-           <div className="campo">
+
+          <div className="campo">
             <input
               type="text"
               name="apellido"
@@ -48,6 +65,7 @@ function Inicio({ onContinuar }) {
               required
             />
           </div>
+
           <div className="campo">
             <input
               type="email"
