@@ -17,8 +17,6 @@ function MateriaFisica() {
   );
 }
 
-<<<<<<< HEAD
+
 export default MateriaFisica;
-=======
-export default MateriaFisica;
->>>>>>> 8361505a1bf3c0988d9f822b1d549bebc95301b5
+

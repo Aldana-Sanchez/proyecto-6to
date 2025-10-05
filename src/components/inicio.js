@@ -11,13 +11,19 @@ function Inicio({ onContinuar }) {
     rol: "",
   });
 
+  const [passwordError, setPasswordError] = useState(""); // ⬅️ Estado para mensaje de error
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "contrasena") {
+      setPasswordError(""); // limpia el error mientras escribe
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validación de campos vacíos
     if (
       !formData.nombre ||
       !formData.apellido ||
@@ -30,11 +36,18 @@ function Inicio({ onContinuar }) {
       return;
     }
 
-    if (formData.rol !== "alumno") {
-      alert("Solo los alumnos pueden inscribirse a materias.");
+    // Validación de contraseña
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+
+    if (!passwordRegex.test(formData.contrasena)) {
+      setPasswordError(
+        "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial (!@#$%^&*)."
+      );
       return;
     }
 
+    // Si pasa todo → continuar
     onContinuar(formData);
   };
 
@@ -54,7 +67,6 @@ function Inicio({ onContinuar }) {
               required
             />
           </div>
-
           <div className="campo">
             <input
               type="text"
@@ -65,7 +77,6 @@ function Inicio({ onContinuar }) {
               required
             />
           </div>
-
           <div className="campo">
             <input
               type="email"
@@ -86,6 +97,12 @@ function Inicio({ onContinuar }) {
               onChange={handleChange}
               required
             />
+            {/* mensaje de error */}
+            {passwordError && (
+              <p style={{ color: "red", fontSize: "0.9em" }}>
+                {passwordError}
+              </p>
+            )}
           </div>
 
           <div className="campo">
