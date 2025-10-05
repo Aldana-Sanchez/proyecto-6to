@@ -28,6 +28,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
       alert("Seleccioná al menos una materia.");
       return;
     }
+
     if (materiasElegidas.length > 5) {
   alert("Solo podés elegir hasta 5 materias.");
   return;
