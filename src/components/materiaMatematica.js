@@ -2,9 +2,10 @@ import React from "react";
 
 function MateriaMatematica() {
   return (
-    <div className="cuadro">
-      <h2>Matemática</h2>
-      <h3>Programa</h3>
+    <div className="pagina-materia">
+      <h2>Matematica</h2>
+      <div className="cuadro">
+        <h3>Programa</h3>
       <p> Unidad No 1: UNIDADES DE MEDIDA
 SIMELA, medidas de longitud y superficie. Conversión de unidades. Situación
 problemática con figuras planas (cuadrados y rectángulos). Figuras geométricas
@@ -37,13 +38,17 @@ Pasaje de números decimales y periódicos a fracción y viceversa. Simplificaci
 fracciones. Suma, resta, multiplicación, división, potenciación y radicación con números
 racionales. Propiedades de las operaciones. Potenciación y Radicación. Cálculos
 combinados. Ecuaciones. Aplicación de SIMELA en figuras planas y Volumen.</p>
-      <h3>Clases de consulta</h3>
-      <ul>
-        <li>Lunes 14:00 - 16:00</li>
-        <li>Miércoles 10:00 - 12:00</li>
-      </ul>
+ </div>
+      <div className="cuadro">
+        <h3>Clases de consulta</h3>
+        <ul>
+          <li>Lunes 16:00 - 18:00</li>
+          <li>Viernes 11:00 - 12:30</li>
+        </ul>
+      </div>
     </div>
   );
 }
+
 
 export default MateriaMatematica;

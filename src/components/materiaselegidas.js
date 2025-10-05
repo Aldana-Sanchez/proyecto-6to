@@ -5,6 +5,8 @@ import MateriaHistoria1 from "./materiahistoria1";
 import MateriaBiologia1 from "./materiabiologia1";
 import MateriaDibujo1 from "./materiadibujo1";
 import MateriaGeografia1 from "./materiageografia1";
+import MateriaProgramacion from "./materiaProgramacion";
+
 
 function MateriasSeleccionadas({ materias, volver }) {
   const componentesMaterias = {
@@ -14,6 +16,7 @@ function MateriasSeleccionadas({ materias, volver }) {
     biologia: <MateriaBiologia1 />,
     dibujo: <MateriaDibujo1 />,
     geografia: <MateriaGeografia1 />,
+    programacion: <MateriaProgramacion/>,
   };
 
   return (

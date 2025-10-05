@@ -11,19 +11,18 @@ function Inicio({ onContinuar }) {
     rol: "",
   });
 
-  const [passwordError, setPasswordError] = useState(""); // ⬅️ Estado para mensaje de error
+  const [passwordError, setPasswordError] = useState(""); 
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (e.target.name === "contrasena") {
-      setPasswordError(""); // limpia el error mientras escribe
+      setPasswordError(""); 
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validación de campos vacíos
     if (
       !formData.nombre ||
       !formData.apellido ||
@@ -36,7 +35,6 @@ function Inicio({ onContinuar }) {
       return;
     }
 
-    // Validación de contraseña
     const passwordRegex =
       /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
@@ -47,7 +45,6 @@ function Inicio({ onContinuar }) {
       return;
     }
 
-    // Si pasa todo → continuar
     onContinuar(formData);
   };
 
