@@ -29,6 +29,12 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
       return;
     }
 
+    if (materiasElegidas.length > 5) {
+  alert("Solo podés elegir hasta 5 materias.");
+  return;
+}
+
+
     console.log("Intentando guardar en Firestore...", materiasElegidas);
     setGuardando(true);
 
