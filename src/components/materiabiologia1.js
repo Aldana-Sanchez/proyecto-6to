@@ -1,7 +1,7 @@
 function materiabiologia1() {
   return (
     <div className="pagina-materia">
-      <h2>Biologia</h2>
+      <h2>Fisica</h2>
       <div className="cuadro">
         <h3>Programa</h3>
         <p> UNIDAD N° 1: PANORAMA ECOLÓGICO
