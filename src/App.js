@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Inicio from "./components/inicio";
 import FormularioInscripcion from "./components/FormularioInscripcion";
 import MateriasSeleccionadas from "./components/materiaselegidas";
-import "./estilo.css"; // estilos personalizados
+import "./estilo.css"; 
 import { db } from "./firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -11,7 +11,7 @@ function App() {
   const [usuario, setUsuario] = useState(null);
   const [materias, setMaterias] = useState([]);
 
-  //firebase
+ 
 const seleccionarMaterias = (materiasSeleccionadas) => {
   setMaterias(materiasSeleccionadas);
   setPantalla("materia");

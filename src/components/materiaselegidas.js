@@ -21,7 +21,7 @@ function MateriasSeleccionadas({ materias, volver }) {
 
   return (
     <div className="pagina-materia">
-      <h2>✅ Inscripción confirmada</h2>
+      <h2>Inscripción confirmada</h2>
       <p>Materias seleccionadas:</p>
 
       <ul>
