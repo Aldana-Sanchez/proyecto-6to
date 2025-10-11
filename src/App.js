@@ -41,25 +41,14 @@ const seleccionarMaterias = (materiasSeleccionadas) => {
       )}
 
       {pantalla === "materia" && (
-<<<<<<< HEAD
-        <MateriasSeleccionadas 
-          volver={volverAlFormulario} 
-          materias={materias} 
-=======
         <MateriasSeleccionadas
           volver={volverAlFormulario}
           materias={materias}
->>>>>>> 8361505a1bf3c0988d9f822b1d549bebc95301b5
         />
       )}
     </>
   );
 }
 
-<<<<<<< HEAD
-export default App;
-=======
 export default App;
 
-
->>>>>>> 8361505a1bf3c0988d9f822b1d549bebc95301b5
