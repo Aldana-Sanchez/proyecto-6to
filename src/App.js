@@ -51,3 +51,7 @@ const seleccionarMaterias = (materiasSeleccionadas) => {
 }
 
 export default App;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8577d8c408f3c980bb90b43087c8b3b7a6fafe91
