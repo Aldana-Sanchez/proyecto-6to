@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 import "../estilo.css";
+
 
 function Inicio({ onContinuar }) {
   const [formData, setFormData] = useState({
