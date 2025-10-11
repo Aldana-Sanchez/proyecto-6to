@@ -1,7 +1,7 @@
 function materiahistoria1() {
   return (
     <div className="pagina-materia">
-      <h2>Fisica</h2>
+      <h2>Historia</h2>
       <div className="cuadro">
         <h3>Programa</h3>
         <p> dios sabe </p>

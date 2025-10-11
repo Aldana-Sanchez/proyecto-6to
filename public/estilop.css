@@ -29,6 +29,7 @@ body {
   width: 350px;
   padding: 20px;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  justify-content: center;
 }
 
 .cuadro h2 {
@@ -36,21 +37,25 @@ body {
   color: #8b3f1f;
   font-size: 22px;
   margin-bottom: 15px;
+  justify-content: center;
 }
 
 .contenido-cuadro {
   background-color: #fffaf4;
   padding: 10px;
   border-radius: 8px;
+  justify-content: center;
 }
 
 .contenido-cuadro ul {
   padding-left: 20px;
+  justify-content: center;
 }
 
 .contenido-cuadro table {
   width: 100%;
   border-collapse: collapse;
+  justify-content: center;
 }
 
 .contenido-cuadro table th,
@@ -58,4 +63,5 @@ body {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
+  justify-content: center;
 }

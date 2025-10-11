@@ -3,22 +3,48 @@ import "../estilo.css";
 
 function Inicio({ onContinuar }) {
   const [formData, setFormData] = useState({
+    nombre: "",
+    apellido: "",
     correo: "",
     contrasena: "",
     dni: "",
     rol: "",
   });
 
+  const [passwordError, setPasswordError] = useState(""); 
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "contrasena") {
+      setPasswordError(""); 
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.correo || !formData.contrasena || !formData.dni || !formData.rol) {
+
+    if (
+      !formData.nombre ||
+      !formData.apellido ||
+      !formData.correo ||
+      !formData.contrasena ||
+      !formData.dni ||
+      !formData.rol
+    ) {
       alert("Completa todos los campos y selecciona tu rol.");
       return;
     }
+
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+
+    if (!passwordRegex.test(formData.contrasena)) {
+      setPasswordError(
+        "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial (!@#$%^&*)."
+      );
+      return;
+    }
+
     onContinuar(formData);
   };
 
@@ -28,7 +54,7 @@ function Inicio({ onContinuar }) {
       <div className="formulario-box">
         <h2>REGISTRO DE USUARIO</h2>
         <form onSubmit={handleSubmit}>
-             <div className="campo">
+          <div className="campo">
             <input
               type="text"
               name="nombre"
@@ -38,7 +64,7 @@ function Inicio({ onContinuar }) {
               required
             />
           </div>
-           <div className="campo">
+          <div className="campo">
             <input
               type="text"
               name="apellido"
@@ -68,6 +94,12 @@ function Inicio({ onContinuar }) {
               onChange={handleChange}
               required
             />
+            {/* mensaje de error */}
+            {passwordError && (
+              <p style={{ color: "red", fontSize: "0.9em" }}>
+                {passwordError}
+              </p>
+            )}
           </div>
 
           <div className="campo">
