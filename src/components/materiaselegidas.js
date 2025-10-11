@@ -2,21 +2,22 @@ import React from "react";
 import MateriaMatematica from "./materiaMatematica";
 import MateriaFisica from "./materiaFisica";
 import MateriaHistoria1 from "./materiahistoria1";
+import MateriaHistoria2 from "./materiahistoria2";
 import MateriaBiologia1 from "./materiabiologia1";
 import MateriaDibujo1 from "./materiadibujo1";
 import MateriaGeografia1 from "./materiageografia1";
 import MateriaProgramacion from "./materiaProgramacion";
 
-
 function MateriasSeleccionadas({ materias, volver }) {
   const componentesMaterias = {
     matematica: <MateriaMatematica />,
     fisica: <MateriaFisica />,
-    historia: <MateriaHistoria1 />,
+    historia1: <MateriaHistoria1 />,
+    historia2: <MateriaHistoria2 />,
     biologia: <MateriaBiologia1 />,
     dibujo: <MateriaDibujo1 />,
     geografia: <MateriaGeografia1 />,
-    programacion: <MateriaProgramacion/>,
+    programacion: <MateriaProgramacion />,
   };
 
   return (
@@ -34,7 +35,9 @@ function MateriasSeleccionadas({ materias, volver }) {
 
       <div className="detalle-materias">
         {materias.map((m) => (
-          <div key={m}>{componentesMaterias[m]}</div>
+          <div key={m} className="cuadro-materia">
+            {componentesMaterias[m]}
+          </div>
         ))}
       </div>
 
