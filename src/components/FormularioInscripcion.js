@@ -61,6 +61,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
       <div className="formulario-box">
         <h2>INSCRIPCIÓN A MESAS DE EXAMEN</h2>
         <form onSubmit={handleSubmit}>
+          
           <h3>Materias ciclo básico</h3>
           {formData.materiasBasico.map((materia, i) => (
             <div className="campo" key={`basico-${i}`}>

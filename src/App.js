@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import Inicio from "./components/inicio";
 import FormularioInscripcion from "./components/FormularioInscripcion";
 import MateriasSeleccionadas from "./components/materiaselegidas";
-import "./estilo.css"; 
-import { db } from "./firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import PanelProfesor from "./components/PanelProfesor"; 
+import "./estilo.css";
 
 function App() {
   const [pantalla, setPantalla] = useState("inicio");
   const [usuario, setUsuario] = useState(null);
   const [materias, setMaterias] = useState([]);
 
- 
-const seleccionarMaterias = (materiasSeleccionadas) => {
-  setMaterias(materiasSeleccionadas);
-  setPantalla("materia");
-};
+  const seleccionarMaterias = (materiasSeleccionadas) => {
+    setMaterias(materiasSeleccionadas);
+    setPantalla("materia");
+  };
 
   const volverAlFormulario = () => {
     setPantalla("formulario");
@@ -28,7 +26,13 @@ const seleccionarMaterias = (materiasSeleccionadas) => {
         <Inicio
           onContinuar={(usuarioRegistrado) => {
             setUsuario(usuarioRegistrado);
-            setPantalla("formulario");
+
+           
+            if (usuarioRegistrado.rol === "profesor") {
+              setPantalla("profesor");
+            } else {
+              setPantalla("formulario");
+            }
           }}
         />
       )}
@@ -46,12 +50,10 @@ const seleccionarMaterias = (materiasSeleccionadas) => {
           materias={materias}
         />
       )}
+
+      {pantalla === "profesor" && <PanelProfesor />}
     </>
   );
 }
 
 export default App;
-<<<<<<< HEAD
-
-=======
->>>>>>> 8577d8c408f3c980bb90b43087c8b3b7a6fafe91
