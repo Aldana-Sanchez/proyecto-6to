@@ -71,15 +71,25 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
                 onChange={(e) => handleSelectChange(e, i, "materiasBasico")}
               >
                 <option value="">Seleccionar materia</option>
-                <option value="matematica">Matemática 1°</option>
-                <option value="lengua">Lengua y Literatura 1°</option>
-                <option value="historia">Historia 1°</option>
-                <option value="fisica">Física 1°</option>
-                <option value="biologia">Biología 1°</option>
-                <option value="educacion civica">Educación Cívica 1°</option>
-                <option value="dibujo">Dibujo 1°</option>
-                <option value="geografia">Geografía 1°</option>
-              </select>
+                <option value="matematica1">Matemática 1°</option>
+                    <option value="matematica2">Matemática 2°</option>
+                    <option value="lengua1">Lengua y Literatura 1°</option>
+                    <option value="lengua2">Lengua y Literatura 2°</option>
+                    <option value="historia1">Historia 1°</option>
+                    <option value="historia2">Historia 2°</option>
+                    <option value="fisica1">Física 1°</option>
+                    <option value="fisica2">Física 2°</option>
+                    <option value="fisica3">Física 3°</option>
+                    <option value="biologia1">Biología 1°</option>
+                    <option value="biologia2">Biología 2°</option>
+                    <option value="civica1">Educación Cívica 1°</option>
+                    <option value="civica2">Educación Cívica 2°</option>
+                    <option value="civica3">Educación Cívica 3°</option>
+                    <option value="dibujo1">Dibujo 1°</option>
+                    <option value="dibujo2">Dibujo 2°</option>
+                    <option value="geografia1">Geografía 1°</option>
+                    <option value="geografia2">Geografía 2°</option>
+                </select>
             </div>
           ))}
 
@@ -109,3 +119,5 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
 }
 
 export default FormularioInscripcion;
+
+
