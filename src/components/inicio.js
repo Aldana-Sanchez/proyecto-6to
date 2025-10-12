@@ -56,7 +56,6 @@ function Inicio() {
     }
 
     try {
-      // 🔍 Verificamos si el correo ya existe en Firestore
       const q = query(
         collection(db, "usuarios"),
         where("correo", "==", formData.correo)
@@ -68,7 +67,6 @@ function Inicio() {
         return;
       }
 
-      // ✅ Si no existe, se registra normalmente
       await addDoc(collection(db, "usuarios"), {
         ...formData,
         fechaRegistro: new Date(),
