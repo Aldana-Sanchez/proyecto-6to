@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom"; // 🔹 para redirigir
+import { useAuth } from "../context/AuthContext"; 
+import { useNavigate } from "react-router-dom"; 
 import "../estilo.css";
 
 function FormularioInscripcion({ onMateriasSeleccionadas }) {
@@ -10,7 +11,9 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
     materiasSuperior: ["", "", "", "", ""],
   });
   const [guardando, setGuardando] = useState(false);
-  const navigate = useNavigate(); // 🔹 usamos navigate
+
+  const { user } = useAuth(); 
+  const navigate = useNavigate();
 
   const handleSelectChange = (e, index, ciclo) => {
     const updatedMaterias = [...formData[ciclo]];
@@ -36,26 +39,24 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
       return;
     }
 
-    console.log("Intentando guardar en Firestore...", materiasElegidas);
     setGuardando(true);
 
     try {
-      const docRef = await addDoc(collection(db, "inscripciones"), {
+      await addDoc(collection(db, "inscripciones"), {
         materias: materiasElegidas,
         fecha: new Date(),
+        nombre: user?.nombre || "",
+        apellido: user?.apellido || "",
+        correo: user?.correo || "",
       });
 
-      console.log("Documento agregado con ID:", docRef.id);
       alert("✅ Inscripción guardada correctamente!");
 
-      // 🔹 Si existe la función onMateriasSeleccionadas, la llamamos
       if (typeof onMateriasSeleccionadas === "function") {
         onMateriasSeleccionadas(materiasElegidas);
       }
 
-      // 🔹 Redirigimos al inicio tras guardar
-      navigate("/");
-
+      navigate("/"); 
     } catch (error) {
       console.error("Error al guardar:", error);
       alert("Error al guardar. Mirá la consola para más info.");

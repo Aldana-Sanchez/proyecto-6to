@@ -25,6 +25,8 @@ export default function ListadoDatos() {
   return (
     <div style={{ padding: 20 }}>
       <h2>Listado de inscripciones</h2>
+      <h3>Toque ID para el resto de la Información </h3>
+
       {inscripciones.length === 0 ? (
         <p>No hay inscripciones registradas.</p>
       ) : (

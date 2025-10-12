@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 function Detalle() {
-  const { id } = useParams(); // obtiene el id de la URL
+  const { id } = useParams();
   const [inscripcion, setInscripcion] = useState(null);
 
   useEffect(() => {
@@ -23,19 +23,28 @@ function Detalle() {
     };
 
     fetchInscripcion();
-  }, [id]); 
-   if (!inscripcion) return <p>Cargando datos...</p>;
+  }, [id]);
+
+  if (!inscripcion) return <p className="mensaje-carga">Cargando datos...</p>;
 
   return (
-    <div className="pagina">
-      <h2>Detalle de inscripción</h2>
-      <p><strong>Fecha:</strong> {new Date(inscripcion.fecha.seconds * 1000).toLocaleString()}</p>
-      <p><strong>Materias inscritas:</strong></p>
-      <ul>
-        {inscripcion.materias?.map((m, i) => (
-          <li key={i}>{m}</li>
-        ))}
-      </ul>
+    <div className="listado-contenedor">
+      <h2 className="titulo-listado">📄 Detalle de inscripción</h2>
+
+      <div className="detalle-box">
+        <p><strong>🆔 ID:</strong> {id}</p>
+        <p><strong>👤 Nombre:</strong> {inscripcion.nombre || "—"}</p>
+        <p><strong>👤 Apellido:</strong> {inscripcion.apellido || "—"}</p>
+        <p><strong>📧 Correo:</strong> {inscripcion.correo || "—"}</p>
+        <p><strong>🕓 Fecha:</strong> {new Date(inscripcion.fecha.seconds * 1000).toLocaleString()}</p>
+
+        <h3 style={{ marginTop: "20px" }}>📘 Materias inscritas:</h3>
+        <ul>
+          {inscripcion.materias?.map((m, i) => (
+            <li key={i}>{m}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -309,3 +309,19 @@ body {
   background-color: #b6492d;
 }
 
+/*listado*/
+.detalle-box {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  line-height: 1.7em;
+  color: #4a2c2a;
+}
+
+.detalle-box strong {
+  color: #a24936;
+}
+
+

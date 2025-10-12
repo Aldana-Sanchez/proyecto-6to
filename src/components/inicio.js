@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -56,21 +56,35 @@ function Inicio() {
     }
 
     try {
+      // 🔍 Verificamos si el correo ya existe en Firestore
+      const q = query(
+        collection(db, "usuarios"),
+        where("correo", "==", formData.correo)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        alert("Este correo ya está registrado. Usá otro correo.");
+        return;
+      }
+
+      // ✅ Si no existe, se registra normalmente
       await addDoc(collection(db, "usuarios"), {
         ...formData,
         fechaRegistro: new Date(),
       });
 
       alert("Usuario registrado correctamente!");
-      login(formData); // 🔹 guardamos al usuario logueado
+      login(formData);
 
-      // 🔹 redirección según rol
+      // Redirige según rol
       if (formData.rol === "profesor") {
         navigate("/listado");
       } else {
         navigate("/inscripcion");
       }
 
+      // Limpia el formulario
       setFormData({
         nombre: "",
         apellido: "",
