@@ -5,7 +5,15 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = (userData) => setUser(userData);
+  const login = (userData) => {
+    const formattedUser = {
+      nombre: userData.nombre,
+      apellido: userData.apellido,
+      correo: userData.correo,
+      rol: (userData.rol || "").toLowerCase(),
+    };
+    setUser(formattedUser);
+  };
 
   const logout = () => setUser(null);
 

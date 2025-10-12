@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import "../estilo.css";
 
-function Inicio({ onContinuar }) {
+function Inicio() {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -14,6 +16,8 @@ function Inicio({ onContinuar }) {
   });
 
   const [passwordError, setPasswordError] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,9 +47,7 @@ function Inicio({ onContinuar }) {
       return;
     }
 
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
-
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
     if (!passwordRegex.test(formData.contrasena)) {
       setPasswordError(
         "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial (!@#$%^&*)."
@@ -55,18 +57,19 @@ function Inicio({ onContinuar }) {
 
     try {
       await addDoc(collection(db, "usuarios"), {
-        nombre: formData.nombre,
-        apellido: formData.apellido,
-        correo: formData.correo,
-        contrasena: formData.contrasena,
-        dni: formData.dni,
-        rol: formData.rol,
+        ...formData,
         fechaRegistro: new Date(),
       });
 
       alert("Usuario registrado correctamente!");
+      login(formData); // 🔹 guardamos al usuario logueado
 
-      onContinuar(formData);
+      // 🔹 redirección según rol
+      if (formData.rol === "profesor") {
+        navigate("/listado");
+      } else {
+        navigate("/inscripcion");
+      }
 
       setFormData({
         nombre: "",
