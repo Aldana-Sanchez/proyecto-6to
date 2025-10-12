@@ -24,3 +24,20 @@ function Detalle() {
 
     fetchInscripcion();
   }, [id]); 
+   if (!inscripcion) return <p>Cargando datos...</p>;
+
+  return (
+    <div className="pagina">
+      <h2>Detalle de inscripción</h2>
+      <p><strong>Fecha:</strong> {new Date(inscripcion.fecha.seconds * 1000).toLocaleString()}</p>
+      <p><strong>Materias inscritas:</strong></p>
+      <ul>
+        {inscripcion.materias?.map((m, i) => (
+          <li key={i}>{m}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Detalle;

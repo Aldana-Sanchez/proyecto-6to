@@ -1,58 +1,41 @@
-import React, { useState } from "react";
+// src/App.js
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import BarraSuperior from "./BarraSuperior";
+import ListadoDatos from "./ListadoDatos";
+import FormularioInscripcion from "./FormularioInscripcion";
+import Detalle from "./components/Detalle";
 import Inicio from "./components/inicio";
-import FormularioInscripcion from "./components/FormularioInscripcion";
-import MateriasSeleccionadas from "./components/materiaselegidas";
-import PanelProfesor from "./components/PanelProfesor"; 
+import PanelProfesor from "./components/PanelProfesor";
+import LoginPage from "./components/LoginPage";
+
 import "./estilo.css";
 
 function App() {
-  const [pantalla, setPantalla] = useState("inicio");
-  const [usuario, setUsuario] = useState(null);
-  const [materias, setMaterias] = useState([]);
-
-  const seleccionarMaterias = (materiasSeleccionadas) => {
-    setMaterias(materiasSeleccionadas);
-    setPantalla("materia");
-  };
-
-  const volverAlFormulario = () => {
-    setPantalla("formulario");
-    setMaterias([]);
-  };
-
   return (
-    <>
-      {pantalla === "inicio" && (
-        <Inicio
-          onContinuar={(usuarioRegistrado) => {
-            setUsuario(usuarioRegistrado);
+    <BrowserRouter>
+      <AuthProvider>
+        <BarraSuperior />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/listado" element={<ListadoDatos />} />
+          <Route path="/detalle/:id" element={<Detalle />} />
+          <Route path="/login" element={<LoginPage />} />
 
-           
-            if (usuarioRegistrado.rol === "profesor") {
-              setPantalla("profesor");
-            } else {
-              setPantalla("formulario");
-            }
-          }}
-        />
-      )}
+          {/* Rutas protegidas */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/inscripcion" element={<FormularioInscripcion />} />
+            <Route path="/panel" element={<PanelProfesor />} />
+          </Route>
 
-      {pantalla === "formulario" && (
-        <FormularioInscripcion
-          onMateriasSeleccionadas={seleccionarMaterias}
-          usuario={usuario}
-        />
-      )}
-
-      {pantalla === "materia" && (
-        <MateriasSeleccionadas
-          volver={volverAlFormulario}
-          materias={materias}
-        />
-      )}
-
-      {pantalla === "profesor" && <PanelProfesor />}
-    </>
+          <Route path="*" element={<div style={{padding:20}}>404 - Página no encontrada</div>} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
