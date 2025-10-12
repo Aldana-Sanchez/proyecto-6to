@@ -57,7 +57,6 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
 
   return (
     <div className="pagina">
-      <div className="barra-roja"></div>
       <div className="formulario-box">
         <h2>INSCRIPCIÓN A MESAS DE EXAMEN</h2>
         <form onSubmit={handleSubmit}>

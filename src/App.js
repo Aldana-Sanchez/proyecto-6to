@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import BarraSuperior from "./BarraSuperior";
-import FormularioInscripcion from "./FormularioInscripcion";
-import ListadoDatos from "./ListadoDatos";
+import BarraSuperior from "./components/BarraSuperior";
+import FormularioInscripcion from "./components/FormularioInscripcion";
+import ListadoDatos from "./components/ListadoDatos";
 import Detalle from "./components/Detalle";
 import Inicio from "./components/inicio"; 
 import "./estilo.css";
@@ -21,7 +21,7 @@ function App() {
 
           {/* rutas protegidas */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/inscripcion" element={<FormularioInscripcion />} />
+            <Route path="/inscripcion" element={<Inicio />} />
             <Route path="/listado" element={<ListadoDatos />} />
             <Route path="/detalle/:id" element={<Detalle />} />
           </Route>

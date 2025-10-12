@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../estilo.css";
 
 function BarraSuperior() {
   return (
+    <div class ="barrita">
     <nav style={{ padding: 10, borderBottom: "1px solid #ccc" }}>
-      <Link to="/">Inicio</Link>{" | "}
-      <Link to="/inscripcion">Inscripción</Link>{" | "}
-      <Link to="/listado">Listado</Link>
+      <div class="BARRA">
+      <Link class ="BARRA" to="/inscripcion">Inscripción</Link>{" | "}
+      <Link class ="BARRA" to="/listado">Listado</Link>
+      </div>
     </nav>
+    </div>
   );
 }
 

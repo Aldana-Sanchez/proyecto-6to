@@ -84,7 +84,6 @@ function Inicio({ onContinuar }) {
 
   return (
     <div className="pagina">
-      <div className="barra-roja"></div>
       <div className="formulario-box">
         <h2>REGISTRO DE USUARIO</h2>
         <form onSubmit={handleSubmit}>
