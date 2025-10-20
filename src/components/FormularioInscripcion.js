@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { useAuth } from "../context/AuthContext"; 
+import { useNavigate } from "react-router-dom"; 
 import "../estilo.css";
 
 function FormularioInscripcion({ onMateriasSeleccionadas }) {
@@ -9,6 +11,9 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
     materiasSuperior: ["", "", "", "", ""],
   });
   const [guardando, setGuardando] = useState(false);
+
+  const { user } = useAuth(); 
+  const navigate = useNavigate();
 
   const handleSelectChange = (e, index, ciclo) => {
     const updatedMaterias = [...formData[ciclo]];
@@ -30,23 +35,28 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
     }
 
     if (materiasElegidas.length > 5) {
-  alert("Solo podés elegir hasta 5 materias.");
-  return;
-}
+      alert("Solo podés elegir hasta 5 materias.");
+      return;
+    }
 
-
-    console.log("Intentando guardar en Firestore...", materiasElegidas);
     setGuardando(true);
 
     try {
-      const docRef = await addDoc(collection(db, "inscripciones"), {
+      await addDoc(collection(db, "inscripciones"), {
         materias: materiasElegidas,
         fecha: new Date(),
+        nombre: user?.nombre || "",
+        apellido: user?.apellido || "",
+        correo: user?.correo || "",
       });
-      console.log("Documento agregado con ID:", docRef.id);
-      alert("Inscripción guardada en Firebase!");
 
-      onMateriasSeleccionadas(materiasElegidas);
+      alert("✅ Inscripción guardada correctamente!");
+
+      if (typeof onMateriasSeleccionadas === "function") {
+        onMateriasSeleccionadas(materiasElegidas);
+      }
+
+      navigate("/"); 
     } catch (error) {
       console.error("Error al guardar:", error);
       alert("Error al guardar. Mirá la consola para más info.");
@@ -57,7 +67,6 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
 
   return (
     <div className="pagina">
-      <div className="barra-roja"></div>
       <div className="formulario-box">
         <h2>INSCRIPCIÓN A MESAS DE EXAMEN</h2>
         <form onSubmit={handleSubmit}>
@@ -66,18 +75,28 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
             <div className="campo" key={`basico-${i}`}>
               <span className="icono">📕</span>
               <select
-                value={materia || ""}                    
+                value={materia || ""}
                 onChange={(e) => handleSelectChange(e, i, "materiasBasico")}
               >
                 <option value="">Seleccionar materia</option>
-                <option value="matematica">Matemática 1°</option>
-                <option value="lengua">Lengua y Literatura 1°</option>
-                <option value="historia">Historia 1°</option>
-                <option value="fisica">Física 1°</option>
-                <option value="biologia">Biología 1°</option>
-                <option value="educacion civica">Educación Cívica 1°</option>
-                <option value="dibujo">Dibujo 1°</option>
-                <option value="geografia">Geografía 1°</option>
+                <option value="matematica1">Matemática 1°</option>
+                <option value="matematica2">Matemática 2°</option>
+                <option value="lengua1">Lengua y Literatura 1°</option>
+                <option value="lengua2">Lengua y Literatura 2°</option>
+                <option value="historia1">Historia 1°</option>
+                <option value="historia2">Historia 2°</option>
+                <option value="fisica1">Física 1°</option>
+                <option value="fisica2">Física 2°</option>
+                <option value="fisica3">Física 3°</option>
+                <option value="biologia1">Biología 1°</option>
+                <option value="biologia2">Biología 2°</option>
+                <option value="civica1">Educación Cívica 1°</option>
+                <option value="civica2">Educación Cívica 2°</option>
+                <option value="civica3">Educación Cívica 3°</option>
+                <option value="dibujo1">Dibujo 1°</option>
+                <option value="dibujo2">Dibujo 2°</option>
+                <option value="geografia1">Geografía 1°</option>
+                <option value="geografia2">Geografía 2°</option>
               </select>
             </div>
           ))}
@@ -87,7 +106,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
             <div className="campo" key={`superior-${i}`}>
               <span className="icono">📘</span>
               <select
-                value={materia || ""}                
+                value={materia || ""}
                 onChange={(e) => handleSelectChange(e, i, "materiasSuperior")}
               >
                 <option value="">Seleccionar materia</option>

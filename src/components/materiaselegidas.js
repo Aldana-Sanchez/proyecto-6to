@@ -1,27 +1,50 @@
 import React from "react";
-import MateriaMatematica from "./materiaMatematica";
-import MateriaFisica from "./materiaFisica";
-import MateriaHistoria1 from "./materiahistoria1";
-import MateriaBiologia1 from "./materiabiologia1";
-import MateriaDibujo1 from "./materiadibujo1";
-import MateriaGeografia1 from "./materiageografia1";
-import MateriaProgramacion from "./materiaProgramacion";
+import MateriaMatematica from "./materiaMatematica.js";
+import MateriaFisica from "./materiaFisica.js";
+import MateriaHistoria1 from "./materiahistoria1.js";
+import MateriaHistoria2 from "./materiahistoria2.js";
+import MateriaBiologia1 from "./materiabiologia1.js";
+import MateriaDibujo1 from "./materiadibujo1.js";
+import MateriaGeografia1 from "./materiageografia1.js";
+import MateriaProgramacion from "./materiaProgramacion.js";
+import Materiabiologia2 from "./materiabiologia2.js";
+import Materiacivica1 from "./materiacivica1.js";
+import Materiacivica2 from "./materiacivica2.js";
+import Materiacivica3 from "./materiacivica3.js";
+import Materiadibujo2 from "./materiadibujo2.js";
+import Materiafisica2 from "./materiafisica2.js";
+import Materiafisica3 from "./materiafisica3.js";
+import Materiageografia2 from "./materiageografia2.js";
+import Materialengua2 from "./materialengua2.js";
+import Materiamatematica2 from "./materiamatematica2.js";
 
 
 function MateriasSeleccionadas({ materias, volver }) {
   const componentesMaterias = {
     matematica: <MateriaMatematica />,
     fisica: <MateriaFisica />,
-    historia: <MateriaHistoria1 />,
+    historia1: <MateriaHistoria1 />,
+    historia2: <MateriaHistoria2 />,
     biologia: <MateriaBiologia1 />,
     dibujo: <MateriaDibujo1 />,
     geografia: <MateriaGeografia1 />,
-    programacion: <MateriaProgramacion/>,
+    programacion: <MateriaProgramacion />,
+      matematica2: <Materiamatematica2 />,
+        biologia2: <Materiabiologia2 />,
+        civica1: <Materiacivica1 />,
+        civica2: <Materiacivica2 />,
+        civica3: <Materiacivica3 />,
+        dibujo2: <Materiadibujo2 />,
+        fisica2: <Materiafisica2 />,
+        fisica3: <Materiafisica3 />,
+        geografia2: <Materiageografia2 />,
+        lengua2: <Materialengua2 />,
+
   };
 
   return (
     <div className="pagina-materia">
-      <h2>✅ Inscripción confirmada</h2>
+      <h2>Inscripción confirmada</h2>
       <p>Materias seleccionadas:</p>
 
       <ul>
@@ -34,7 +57,9 @@ function MateriasSeleccionadas({ materias, volver }) {
 
       <div className="detalle-materias">
         {materias.map((m) => (
-          <div key={m}>{componentesMaterias[m]}</div>
+          <div key={m} className="cuadro-materia">
+            {componentesMaterias[m]}
+          </div>
         ))}
       </div>
 
@@ -44,3 +69,4 @@ function MateriasSeleccionadas({ materias, volver }) {
 }
 
 export default MateriasSeleccionadas;
+

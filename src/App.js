@@ -1,52 +1,39 @@
-import React, { useState } from "react";
-import Inicio from "./components/inicio";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import BarraSuperior from "./components/BarraSuperior";
 import FormularioInscripcion from "./components/FormularioInscripcion";
-import MateriasSeleccionadas from "./components/materiaselegidas";
-import "./estilo.css"; // estilos personalizados
-import { db } from "./firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import ListadoDatos from "./components/ListadoDatos";
+import Detalle from "./components/Detalle";
+import Inicio from "./components/inicio";
+import "./estilo.css";
 
 function App() {
-  const [pantalla, setPantalla] = useState("inicio");
-  const [usuario, setUsuario] = useState(null);
-  const [materias, setMaterias] = useState([]);
-
-  //firebase
-const seleccionarMaterias = (materiasSeleccionadas) => {
-  setMaterias(materiasSeleccionadas);
-  setPantalla("materia");
-};
-
-  const volverAlFormulario = () => {
-    setPantalla("formulario");
-    setMaterias([]);
-  };
-
   return (
-    <>
-      {pantalla === "inicio" && (
-        <Inicio
-          onContinuar={(usuarioRegistrado) => {
-            setUsuario(usuarioRegistrado);
-            setPantalla("formulario");
-          }}
-        />
-      )}
+    <BrowserRouter>
+      <AuthProvider>
+        <BarraSuperior />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
 
-      {pantalla === "formulario" && (
-        <FormularioInscripcion
-          onMateriasSeleccionadas={seleccionarMaterias}
-          usuario={usuario}
-        />
-      )}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/inscripcion" element={<FormularioInscripcion />} />
+            <Route path="/listado" element={<ListadoDatos />} />
+            <Route path="/detalle/:id" element={<Detalle />} />
+          </Route>
 
-      {pantalla === "materia" && (
-        <MateriasSeleccionadas 
-          volver={volverAlFormulario} 
-          materias={materias} 
-        />
-      )}
-    </>
+
+          <Route
+            path="*"
+            element={<div style={{ padding: 20 }}>404 - Página no encontrada</div>}
+          />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
+
   );
 }
 
