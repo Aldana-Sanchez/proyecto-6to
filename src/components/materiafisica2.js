@@ -1,4 +1,4 @@
-function Materiafisica2() {
+function materiafisica2() {
   return (
     <div className="pagina-materia">
       <h2>Fisica</h2>
@@ -17,4 +17,4 @@ function Materiafisica2() {
   );
 }
 
-export default Materiafisica2;
+export default materiafisica2;
