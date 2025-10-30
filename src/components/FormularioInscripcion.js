@@ -56,7 +56,7 @@ function FormularioInscripcion({ onMateriasSeleccionadas }) {
         onMateriasSeleccionadas(materiasElegidas);
       }
 
-      navigate("/"); 
+navigate("/materias", { state: { materias: materiasElegidas } });
     } catch (error) {
       console.error("Error al guardar:", error);
       alert("Error al guardar. Mirá la consola para más info.");

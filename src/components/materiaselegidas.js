@@ -1,4 +1,6 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import MateriaMatematica from "./materiaMatematica.js";
 import MateriaFisica from "./materiaFisica.js";
 import MateriaHistoria1 from "./materiahistoria1.js";
@@ -18,55 +20,59 @@ import Materiageografia2 from "./materiageografia2.js";
 import Materialengua2 from "./materialengua2.js";
 import Materiamatematica2 from "./materiamatematica2.js";
 
+function MateriasSeleccionadas() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const materias = location.state?.materias || [];
 
-function MateriasSeleccionadas({ materias, volver }) {
   const componentesMaterias = {
-    matematica: <MateriaMatematica />,
-    fisica: <MateriaFisica />,
+    matematica1: <MateriaMatematica />,
+    fisica1: <MateriaFisica />,
     historia1: <MateriaHistoria1 />,
     historia2: <MateriaHistoria2 />,
-    biologia: <MateriaBiologia1 />,
-    dibujo: <MateriaDibujo1 />,
-    geografia: <MateriaGeografia1 />,
+    biologia1: <MateriaBiologia1 />,
+    dibujo1: <MateriaDibujo1 />,
+    geografia1: <MateriaGeografia1 />,
     programacion: <MateriaProgramacion />,
-      matematica2: <Materiamatematica2 />,
-        biologia2: <Materiabiologia2 />,
-        civica1: <Materiacivica1 />,
-        civica2: <Materiacivica2 />,
-        civica3: <Materiacivica3 />,
-        dibujo2: <Materiadibujo2 />,
-        fisica2: <Materiafisica2 />,
-        fisica3: <Materiafisica3 />,
-        geografia2: <Materiageografia2 />,
-        lengua2: <Materialengua2 />,
-
+    matematica2: <Materiamatematica2 />,
+    biologia2: <Materiabiologia2 />,
+    civica1: <Materiacivica1 />,
+    civica2: <Materiacivica2 />,
+    civica3: <Materiacivica3 />,
+    dibujo2: <Materiadibujo2 />,
+    fisica2: <Materiafisica2 />,
+    fisica3: <Materiafisica3 />,
+    geografia2: <Materiageografia2 />,
+    lengua2: <Materialengua2 />,
   };
 
   return (
     <div className="pagina-materia">
-      <h2>Inscripción confirmada</h2>
-      <p>Materias seleccionadas:</p>
+      <h2>✅ Inscripción confirmada</h2>
+      {materias.length > 0 ? (
+        <>
+          <p>Materias seleccionadas:</p>
+          <ul>
+            {materias.map((m, i) => (
+              <li key={i}>{m.charAt(0).toUpperCase() + m.slice(1)}</li>
+            ))}
+          </ul>
 
-      <ul>
-        {materias.map((m, i) => (
-          <li key={i}>
-            {m.charAt(0).toUpperCase() + m.slice(1)}
-          </li>
-        ))}
-      </ul>
-
-      <div className="detalle-materias">
-        {materias.map((m) => (
-          <div key={m} className="cuadro-materia">
-            {componentesMaterias[m]}
+          <div className="detalle-materias">
+            {materias.map((m) => (
+              <div key={m} className="cuadro-materia">
+                {componentesMaterias[m] || <p>{m}</p>}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <p>No se recibieron materias seleccionadas.</p>
+      )}
 
-      <button onClick={volver}>Volver</button>
+      <button onClick={() => navigate("/inscripcion")}>Volver</button>
     </div>
   );
 }
 
 export default MateriasSeleccionadas;
-

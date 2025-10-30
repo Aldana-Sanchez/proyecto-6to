@@ -9,6 +9,7 @@ import FormularioInscripcion from "./components/FormularioInscripcion";
 import ListadoDatos from "./components/ListadoDatos";
 import Detalle from "./components/Detalle";
 import Inicio from "./components/inicio";
+import MateriasSeleccionadas from "./components/materiaselegidas"; 
 import "./estilo.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/inscripcion" element={<FormularioInscripcion />} />
             <Route path="/listado" element={<ListadoDatos />} />
             <Route path="/detalle/:id" element={<Detalle />} />
+            <Route path="/materias" element={<MateriasSeleccionadas />} /> 
           </Route>
 
           <Route
@@ -36,3 +38,4 @@ function App() {
 }
 
 export default App;
+

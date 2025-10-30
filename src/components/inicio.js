@@ -62,11 +62,6 @@ function Inicio() {
       );
       const querySnapshot = await getDocs(q);
 
-      if (!querySnapshot.empty) {
-        alert("Este correo ya está registrado. Usá otro correo.");
-        return;
-      }
-
       await addDoc(collection(db, "usuarios"), {
         ...formData,
         fechaRegistro: new Date(),
