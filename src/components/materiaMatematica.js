@@ -2,6 +2,7 @@ import React from "react";
 
 function MateriaMatematica() {
   return (
+
     <div className="pagina-materia">
       <h2>Matematica</h2>
       <div className="cuadro">
@@ -46,6 +47,7 @@ combinados. Ecuaciones. Aplicación de SIMELA en figuras planas y Volumen.</p>
           <li>Viernes 11:00 - 12:30</li>
         </ul>
       </div>
+
     </div>
   );
 }

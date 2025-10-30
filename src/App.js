@@ -27,6 +27,7 @@ function App() {
             <Route path="/materias" element={<MateriasSeleccionadas />} /> 
           </Route>
 
+
           <Route
             path="*"
             element={<div style={{ padding: 20 }}>404 - Página no encontrada</div>}
@@ -34,6 +35,7 @@ function App() {
         </Routes>
       </AuthProvider>
     </BrowserRouter>
+
   );
 }
 
