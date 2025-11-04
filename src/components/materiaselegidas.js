@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import MateriaMatematica from "./materiaMatematica.js";
+import materiamatematica1 from "./materiamatematica1.js";
 import MateriaFisica from "./materiaFisica.js";
 import MateriaHistoria1 from "./materiahistoria1.js";
 import MateriaHistoria2 from "./materiahistoria2.js";
@@ -28,7 +28,7 @@ function MateriasSeleccionadas() {
   const materias = location.state?.materias || [];
 
   const componentesMaterias = {
-    matematica1: <MateriaMatematica />,
+    matematica1: <Matematica1 />,
     fisica1: <MateriaFisica />,
     historia1: <MateriaHistoria1 />,
     historia2: <MateriaHistoria2 />,

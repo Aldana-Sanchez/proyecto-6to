@@ -1,6 +1,4 @@
-import React from "react";
-
-function MateriaMatematica() {
+function materiamatematica1() {
   return (
 
     <div className="pagina-materia">
@@ -53,4 +51,4 @@ combinados. Ecuaciones. Aplicación de SIMELA en figuras planas y Volumen.</p>
 }
 
 
-export default MateriaMatematica;
+export default materiamatematica1;
