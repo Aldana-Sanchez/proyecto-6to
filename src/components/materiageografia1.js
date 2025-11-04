@@ -1,7 +1,7 @@
 function materiageografia1() {
   return (
     <div className="pagina-materia">
-      <h2>Fisica</h2>
+      <h2>Geografia</h2>
       <div className="cuadro">
         <h3>Programa</h3>
         <p> UNIDAD N° 1: La Geografía y su objeto de estudio

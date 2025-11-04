@@ -1,7 +1,7 @@
 function materiadibujo1() {
   return (
     <div className="pagina-materia">
-      <h2>Fisica</h2>
+      <h2>Dibujo</h2>
       <div className="cuadro">
         <h3>Programa</h3>
         <p> UNIDAD N° 1: Concepto y finalidad del dibujo técnico.

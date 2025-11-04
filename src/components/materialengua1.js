@@ -1,4 +1,4 @@
-function materialengua2() {
+function materialengua1() {
   return (
     <div className="pagina-materia">
       <h2>Lengua</h2>
@@ -47,4 +47,4 @@ Actividades posibles: ejercicios de redacción, corrección de textos, dictados 
   );
 }
 
-export default materialengua2;
+export default materialengua1;

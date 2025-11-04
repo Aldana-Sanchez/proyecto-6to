@@ -19,6 +19,8 @@ import Materiafisica3 from "./materiafisica3.js";
 import Materiageografia2 from "./materiageografia2.js";
 import Materialengua2 from "./materialengua2.js";
 import Materiamatematica2 from "./materiamatematica2.js";
+import Materialengua1 from "./materialengua1.js";
+
 
 function MateriasSeleccionadas() {
   const location = useLocation();
@@ -44,6 +46,8 @@ function MateriasSeleccionadas() {
     fisica3: <Materiafisica3 />,
     geografia2: <Materiageografia2 />,
     lengua2: <Materialengua2 />,
+        lengua1: <Materialengua1 />,
+
   };
 
   return (
