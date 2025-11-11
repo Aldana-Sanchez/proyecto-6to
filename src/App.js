@@ -1,43 +1,71 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import BarraSuperior from "./components/BarraSuperior";
-import FormularioInscripcion from "./components/FormularioInscripcion";
-import ListadoDatos from "./components/ListadoDatos";
-import Detalle from "./components/Detalle";
-import Inicio from "./components/inicio";
-import MateriasSeleccionadas from "./components/materiaselegidas"; 
-import "./estilo.css";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import FormularioInscripcion from "./pages/FormularioInscripcion";
+import PanelProfesor from "./pages/PanelProfesor";
+import MisInscripciones from "./pages/MisInscripciones";
+import NotFound from "./pages/NotFound";
+
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";    
+import { Box } from "@mui/material";
+
+import "./estilo.css"; 
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <AuthProvider>
-        <BarraSuperior />
-        <Routes>
-          <Route path="/" element={<Inicio />} />
+        <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+          <NavBar />
 
-          <Route element={<ProtectedRoute />}>
-            <Route path="/inscripcion" element={<FormularioInscripcion />} />
-            <Route path="/listado" element={<ListadoDatos />} />
-            <Route path="/detalle/:id" element={<Detalle />} />
-            <Route path="/materias" element={<MateriasSeleccionadas />} /> 
-          </Route>
+          <Box component="main" sx={{ flex: 1, mt: 2 }}>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
+              {/* EX ALUMNOS */}
+              <Route
+                path="/inscripcion"
+                element={
+                  <ProtectedRoute roles={["alumno"]}>
+                    <FormularioInscripcion />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/misinscripciones"
+                element={
+                  <ProtectedRoute roles={["alumno"]}>
+                    <MisInscripciones />
+                  </ProtectedRoute>
+                }
+              />
 
-          <Route
-            path="*"
-            element={<div style={{ padding: 20 }}>404 - Página no encontrada</div>}
-          />
-        </Routes>
+              {/* PROFESORES */}
+              <Route
+                path="/panelprofesor"
+                element={
+                  <ProtectedRoute roles={["profesor"]}>
+                    <PanelProfesor />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Box>
+
+          <Footer /> 
+        </Box>
       </AuthProvider>
-    </BrowserRouter>
-
+    </Router>
   );
 }
 
 export default App;
-
