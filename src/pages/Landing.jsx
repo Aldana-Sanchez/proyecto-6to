@@ -32,7 +32,7 @@ export default function Landing() {
               <Typography>• Dirigida exclusivamente a ex-alumnos.</Typography>
               <Typography>• Acceso con Google o correo.</Typography>
               <Typography>• Panel docente para visualizar inscriptos.</Typography>
-              <Typography>• Borrado lógico de usuarios (soft delete).</Typography>
+              <Typography>• Panel de Administrador para visualizar a los usuarios y poder darlos de baja (no elimina)</Typography>
             </Stack>
           </Paper>
         </Grid>

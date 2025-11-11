@@ -9,12 +9,13 @@ import FormularioInscripcion from "./pages/FormularioInscripcion";
 import PanelProfesor from "./pages/PanelProfesor";
 import MisInscripciones from "./pages/MisInscripciones";
 import NotFound from "./pages/NotFound";
+import AdminUsuarios from "./pages/AdminUsuarios"; 
 
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";    
+import Footer from "./components/Footer";
 import { Box } from "@mui/material";
 
-import "./estilo.css"; 
+import "./estilo.css";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
-              {/* EX ALUMNOS */}
+              {/* ALUMNO */}
               <Route
                 path="/inscripcion"
                 element={
@@ -47,7 +48,7 @@ function App() {
                 }
               />
 
-              {/* PROFESORES */}
+              {/* PROFESOR */}
               <Route
                 path="/panelprofesor"
                 element={
@@ -57,11 +58,21 @@ function App() {
                 }
               />
 
+              {/*ADMIN*/}
+              <Route
+                path="/admin/usuarios"
+                element={
+                  <ProtectedRoute roles={["admin"]}>
+                    <AdminUsuarios />
+                  </ProtectedRoute>
+                }
+              />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Box>
 
-          <Footer /> 
+          <Footer />
         </Box>
       </AuthProvider>
     </Router>

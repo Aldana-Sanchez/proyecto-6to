@@ -1,12 +1,28 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase/firebase"; 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebase/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import {
-  Container, Typography, TextField, Button, Grid, Paper, Stack, Alert,
-  InputAdornment, IconButton, FormControl, InputLabel, Select,
-  MenuItem, Checkbox, ListItemText
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Paper,
+  Stack,
+  Alert,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Checkbox,
+  ListItemText,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -14,47 +30,54 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 export default function Register() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    nombre: "", apellido: "", correo: "", dni: "",
-    contraseña: "", confirmar: "", rol: "alumno",
+    nombre: "",
+    apellido: "",
+    correo: "",
+    dni: "",
+    contraseña: "",
+    confirmar: "",
+    rol: "alumno",
     materiasProfesor: [],
   });
   const [error, setError] = useState("");
   const [showPass, setShowPass] = useState(false);
 
   const MATERIAS = [
-  "Biología 1",
-  "Biología 2",
-  "Cívica 1",
-  "Cívica 2",
-  "Cívica 3",
-  "Dibujo 1",
-  "Dibujo 2",
-  "Física 1",
-  "Física 2",
-  "Física 3",
-  "Geografía 1",
-  "Geografía 2",
-  "Historia 1",
-  "Historia 2",
-  "Lengua 2",
-  "Matemática 1",
-  "Matemática 2",
-  "Programación",
-  "Redes",
-  "Web Dinámica",
-  "Web Estática",
-  "Ética y Deontología",
-  "Automatización",
-  "Inglés Técnico 1",
-  "Inglés Técnico 2",
-  "Computación Gráfica",
-  "Organización y Arquitectura 1",
-  "Organización y Arquitectura 2"
-
+    "Biología 1",
+    "Biología 2",
+    "Cívica 1",
+    "Cívica 2",
+    "Cívica 3",
+    "Dibujo 1",
+    "Dibujo 2",
+    "Física 1",
+    "Física 2",
+    "Física 3",
+    "Geografía 1",
+    "Geografía 2",
+    "Historia 1",
+    "Historia 2",
+    "Lengua 2",
+    "Matemática 1",
+    "Matemática 2",
+    "Programación",
+    "Redes",
+    "Web Dinámica",
+    "Web Estática",
+    "Ética y Deontología",
+    "Automatización",
+    "Inglés Técnico 1",
+    "Inglés Técnico 2",
+    "Computación Gráfica",
+    "Organización y Arquitectura 1",
+    "Organización y Arquitectura 2",
   ];
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const validarContraseña = (pass) => /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(pass);
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const validarContraseña = (pass) =>
+    /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(pass);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,12 +86,21 @@ export default function Register() {
     if (form.contraseña !== form.confirmar)
       return setError("Las contraseñas no coinciden.");
     if (!validarContraseña(form.contraseña))
-      return setError("La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
+      return setError(
+        "La contraseña debe tener al menos 8 caracteres, una mayúscula y un número."
+      );
     if (!/^\d{1,8}$/.test(form.dni))
       return setError("El DNI debe tener solo números (hasta 8 dígitos).");
 
     try {
-      const cred = await createUserWithEmailAndPassword(auth, form.correo, form.contraseña);
+      // Crear usuario en Firebase Auth
+      const cred = await createUserWithEmailAndPassword(
+        auth,
+        form.correo,
+        form.contraseña
+      );
+
+      // Guardar datos adicionales en Firestore
       await setDoc(doc(db, "usuarios", cred.user.uid), {
         uid: cred.user.uid,
         rol: form.rol,
@@ -76,11 +108,17 @@ export default function Register() {
         apellido: form.apellido,
         correo: form.correo,
         dni: form.dni,
-        materiasProfesor: form.rol === "profesor" ? form.materiasProfesor : [],
+        materiasProfesor:
+          form.rol === "profesor" ? form.materiasProfesor : [],
         activo: true,
       });
 
+      // Asegurar que quede logueado
+      await signInWithEmailAndPassword(auth, form.correo, form.contraseña);
+
+      // Redirigir sgn el rol
       if (form.rol === "profesor") navigate("/panelprofesor");
+      else if (form.rol === "admin") navigate("/admin/usuarios");
       else navigate("/inscripcion");
     } catch (err) {
       console.error(err);
@@ -97,28 +135,66 @@ export default function Register() {
     <div className="auth-wrapper">
       <Container maxWidth="sm">
         <Paper className="auth-card">
-          <Typography variant="h4" className="auth-title">Registro de usuario</Typography>
-          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+          <Typography variant="h4" className="auth-title">
+            Registro de usuario
+          </Typography>
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
 
           <form onSubmit={handleSubmit}>
             <Stack spacing={2}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="Nombre" name="nombre" onChange={handleChange} required />
+                  <TextField
+                    fullWidth
+                    label="Nombre"
+                    name="nombre"
+                    onChange={handleChange}
+                    required
+                  />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="Apellido" name="apellido" onChange={handleChange} required />
+                  <TextField
+                    fullWidth
+                    label="Apellido"
+                    name="apellido"
+                    onChange={handleChange}
+                    required
+                  />
                 </Grid>
               </Grid>
 
-              <TextField fullWidth label="Correo electrónico" type="email" name="correo" onChange={handleChange} required />
-              <TextField fullWidth label="DNI" name="dni" inputProps={{ maxLength: 8 }} onChange={handleChange} required />
+              <TextField
+                fullWidth
+                label="Correo electrónico"
+                type="email"
+                name="correo"
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                fullWidth
+                label="DNI"
+                name="dni"
+                inputProps={{ maxLength: 8 }}
+                onChange={handleChange}
+                required
+              />
 
               <FormControl fullWidth>
                 <InputLabel>Rol</InputLabel>
-                <Select name="rol" value={form.rol} label="Rol" onChange={handleChange}>
+                <Select
+                  name="rol"
+                  value={form.rol}
+                  label="Rol"
+                  onChange={handleChange}
+                >
                   <MenuItem value="alumno">Ex-alumno</MenuItem>
                   <MenuItem value="profesor">Profesor</MenuItem>
+                  <MenuItem value="admin">Admin</MenuItem>
                 </Select>
               </FormControl>
 
@@ -133,7 +209,9 @@ export default function Register() {
                   >
                     {MATERIAS.map((m) => (
                       <MenuItem key={m} value={m}>
-                        <Checkbox checked={form.materiasProfesor.includes(m)} />
+                        <Checkbox
+                          checked={form.materiasProfesor.includes(m)}
+                        />
                         <ListItemText primary={m} />
                       </MenuItem>
                     ))}

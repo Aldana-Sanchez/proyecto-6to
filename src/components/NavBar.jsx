@@ -32,12 +32,22 @@ export default function NavBar() {
               </>
             )}
 
-            {user.rol === "profesor" && (
+            {user?.rol === "profesor" && (
               <>
-                <Button component={RouterLink} to="/panelprofesor" className="boton-nav">Panel</Button>
-                <Button component={RouterLink} to="/admin/usuarios" className="boton-nav">Usuarios</Button>
+                <Button component={RouterLink} to="/panelprofesor" color="inherit">
+                     Panel
+                </Button>
               </>
             )}
+
+            {user.rol === "admin" && (
+  <>
+    <Button component={RouterLink} to="/admin/usuarios" className="boton-nav">
+      Panel
+    </Button>
+  </>
+)}
+
 
             <Button
               onClick={async () => { await logout(); nav("/login"); }}
