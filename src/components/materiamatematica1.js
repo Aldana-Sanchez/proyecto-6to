@@ -1,10 +1,11 @@
-function materiamatematica2() {
+function materiamatematica1() {
   return (
+
     <div className="pagina-materia">
       <h2>Matematica</h2>
       <div className="cuadro">
         <h3>Programa</h3>
-        <p> Unidad No 1: UNIDADES DE MEDIDA
+      <p> Unidad No 1: UNIDADES DE MEDIDA
 SIMELA, medidas de longitud y superficie. Conversión de unidades. Situación
 problemática con figuras planas (cuadrados y rectángulos). Figuras geométricas
 elementales – Perímetros y áreas. Unidades de tiempo. Sistema inglés de medida: la
@@ -35,17 +36,19 @@ Reducción a común denominador. Orden en la recta numérica y representación g
 Pasaje de números decimales y periódicos a fracción y viceversa. Simplificación de
 fracciones. Suma, resta, multiplicación, división, potenciación y radicación con números
 racionales. Propiedades de las operaciones. Potenciación y Radicación. Cálculos
-combinados. Ecuaciones. Aplicación de SIMELA en figuras planas y Volumen. </p>
-      </div>
+combinados. Ecuaciones. Aplicación de SIMELA en figuras planas y Volumen.</p>
+ </div>
       <div className="cuadro">
         <h3>Clases de consulta</h3>
         <ul>
-          <li>Lunes 15:00 - 16:30</li>
-          <li>Miércoles 09:00 - 12:30 dsjdfskfdsf</li>
+          <li>Lunes 16:00 - 18:00</li>
+          <li>Viernes 11:00 - 12:30</li>
         </ul>
       </div>
+
     </div>
   );
 }
 
-export default materiamatematica2;
+
+export default materiamatematica1;
