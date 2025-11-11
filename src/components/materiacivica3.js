@@ -1,5 +1,5 @@
 function materiacivica3() {
- return (
+  return (
     <div className="pagina-materia">
       <h2>Civica</h2>
       <div className="cuadro">
