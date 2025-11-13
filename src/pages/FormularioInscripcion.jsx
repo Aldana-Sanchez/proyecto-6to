@@ -163,18 +163,15 @@ export default function FormularioInscripcion() {
       case "Cívica 3": return <MateriaCivica3 />;
       case "Dibujo 1": return <MateriaDibujo1 />;
       case "Dibujo 2": return <MateriaDibujo2 />;
-      // Física 1: no hay componente → fallback
       case "Física 2": return <MateriaFisica2 />;
       case "Física 3": return <MateriaFisica3 />;
       case "Geografía 1": return <MateriaGeografia1 />;
       case "Geografía 2": return <MateriaGeografia2 />;
-      // Historia 1: no hay componente → fallback
       case "Historia 2": return <MateriaHistoria2 />;
       case "Lengua 1": return <MateriaLengua1 />;
       case "Lengua 2": return <MateriaLengua2 />;
       case "Matemática 1": return <MateriaMatematica1 />;
       case "Matemática 2": return <MateriaMatematica2 />;
-      // Programación: no hay componente tras el pull → fallback
       default:
         return (
           <Typography variant="body2" color="text.secondary">
