@@ -26,6 +26,7 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { enviarEmailRegistro } from "../email";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -115,6 +116,14 @@ export default function Register() {
 
       // Asegurar que quede logueado
       await signInWithEmailAndPassword(auth, form.correo, form.contraseña);
+
+// Enviar mail de confirmación
+await enviarEmailRegistro({
+  nombre: form.nombre,
+  apellido: form.apellido,
+  correo: form.correo,
+});
+
 
       // Redirigir sgn el rol
       if (form.rol === "profesor") navigate("/panelprofesor");

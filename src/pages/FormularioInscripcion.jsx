@@ -22,6 +22,8 @@ import {
   Alert,
   Divider,
 } from "@mui/material";
+import { enviarEmailInscripcion } from "../email";
+
 
 //  Materias disponibles como componentes 
 import MateriaBiologia1 from "../components/materiabiologia1";
@@ -144,14 +146,122 @@ export default function FormularioInscripcion() {
         { merge: true }
       );
 
+
+
+let materiasTexto = "";
+
+materias.forEach((m) => {
+  materiasTexto += `
+------------------------------------
+Materia: ${m}
+------------------------------------
+`;
+
+  switch (m) {
+    case "Biología 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Biología 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Cívica 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Cívica 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Cívica 3":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Dibujo 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Dibujo 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Física 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Física 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Física 3":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Geografía 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Geografía 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Historia 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Historia 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Lengua 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Lengua 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Matemática 1":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    case "Matemática 2":
+      materiasTexto += "Programa: (completar)\nClase consulta: (completar)\n";
+      break;
+
+    default:
+      materiasTexto += "Programa: No disponible\nClase consulta: No disponible\n";
+      break;
+  }
+
+  materiasTexto += "\n"; // separación segura entre materias
+});
+
+
+// Enviar mail (EmailJS)
+await enviarEmailInscripcion({
+  nombre,
+  apellido,
+  correo,
+  materiasTexto,
+});
+
+
       setInscripcionExistente(true);
-      setAlerta(" Inscripción guardada con éxito");
+      setAlerta({tipo: "success", 
+        msg: "Inscripción guardada con éxito",
+      });
       setTimeout(() => setAlerta(""), 4000);
     } catch (err) {
       console.error(err);
-      setAlerta(" Error al guardar inscripción");
+       setAlerta({tipo: "error", 
+        msg: "Error al guardar la inscrpción",
+      });
     }
   };
+
+  
 
   // Render dinámico de la ficha de cada materia seleccionada
   const mostrarMateria = (nombre) => {
@@ -197,13 +307,11 @@ export default function FormularioInscripcion() {
         </Typography>
 
         {alerta && (
-          <Alert
-            severity={alerta.includes("✅") ? "success" : "error"}
-            sx={{ mb: 3 }}
-          >
-            {alerta}
-          </Alert>
-        )}
+  <Alert severity={alerta.tipo} sx={{ mb: 3 }}>
+    {alerta.msg}
+  </Alert>
+)}
+
 
         <form onSubmit={handleSubmit}>
           <Stack spacing={3}>
