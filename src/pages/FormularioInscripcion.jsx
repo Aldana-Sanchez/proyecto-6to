@@ -145,11 +145,11 @@ export default function FormularioInscripcion() {
       );
 
       setInscripcionExistente(true);
-      setAlerta("✅ Inscripción guardada con éxito");
+      setAlerta(" Inscripción guardada con éxito");
       setTimeout(() => setAlerta(""), 4000);
     } catch (err) {
       console.error(err);
-      setAlerta("❌ Error al guardar inscripción");
+      setAlerta(" Error al guardar inscripción");
     }
   };
 

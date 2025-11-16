@@ -48,7 +48,6 @@ export default function NavBar() {
   </>
 )}
 
-
             <Button
               onClick={async () => { await logout(); nav("/login"); }}
               className="boton-nav boton-outline"
